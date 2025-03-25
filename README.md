@@ -13,6 +13,7 @@ Flow reworks the container desgin on tabs to make it feel a bit more fluent.
   ![Container Inactive](https://github.com/user-attachments/assets/db28b0e9-f000-473b-b6a8-50a8db9beb98)
 
   A small bar that is mostly faded out so you can tell what container the tab is in at a glance, but not be _too_ distracting
+  
 2. #### Active
   ![Container Active](https://github.com/user-attachments/assets/656d0595-cee0-4773-a99a-c783c27ebac0)
 
