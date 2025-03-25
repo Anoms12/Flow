@@ -1,2 +1,2 @@
-# Zen-Flow
-A highly customizable and peaceful them for Zen Browser
+# Flow
+A highly customizable and peaceful theme for Zen Browser that makes it all flow together
