@@ -1,8 +1,6 @@
 # Flow
 A highly customizable and peaceful theme for Zen Browser that makes it all _flow_ together
-##Features
-
-## Feature Requests
+## Features
 Features included in Flow and a descrption and/or screenshot to showcase
 ### Better Animations
 Flow includes reoworked animations from mulitple sorces like [Animations Plus](https://github.com/Anoms12/Animations-plus). These include:
@@ -38,6 +36,8 @@ The tabs right-click menu has been reworked to take up less space and feel more 
 * The extensions menu has been reworked to feel more like Arc browsers menu
 * The History popup was simplified to be more like Arcs history popup
 * The same goes for the downloads menu
+
+## Feature Requests
 
 ## Credits
 
