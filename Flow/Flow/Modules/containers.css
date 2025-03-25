@@ -1,0 +1,32 @@
+/* Containers */
+/* A small theme to improve container theming, inspiered by windows, if you want somthing more native on a different OS please create an issue. */
+
+/* Hide container indication in URL bar */
+#page-action-buttons {
+  display: none !important;
+}
+
+/* rework the context line */
+tab:not([zen-essential]) {
+  &:not([selected]) {
+    .tab-context-line {
+      opacity: 0.17 !important;
+      height: 40% !important;
+      top: 30% !important;
+    }
+  }
+
+  .tab-background {
+    overflow: visible !important;
+  }
+  .tab-context-line {
+    transition: opacity 0.3s ease-out, height 0.3s ease-out, top 0.3s ease-out;
+    opacity: 1 !important;
+    position: relative !important;
+    left: -3px !important;
+    top: 15% !important;
+    height: 70% !important;
+    width: 2px !important;
+    border-radius: 360px !important;
+  }
+}

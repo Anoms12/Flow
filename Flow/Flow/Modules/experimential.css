@@ -1,0 +1,14 @@
+/* Experiments */
+/* This is code that might come in the future but is not completed so is commented out. */
+
+/* Rework download & newtab icon
+#new-tab-button {
+    display: none !important;
+  }
+  
+  :has(#downloads-button[hidden="true"]) {
+    #new-tab-button {
+      display: flex !important;
+    }
+  }
+*/

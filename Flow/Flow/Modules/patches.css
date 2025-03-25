@@ -1,0 +1,12 @@
+/* Patches */
+/* Patches for any code I messed up earlier ot to clean up the overall experience by bug fixing. */
+
+/* Corner fix */
+.browserContainer {
+  clip-path: inset(0 round var(--zen-native-inner-radius));
+}
+
+/* Hides toolbar toggle as it is useless */
+#toggle_toolbar-menubar {
+  display: none !important;
+}

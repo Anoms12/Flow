@@ -1,0 +1,161 @@
+/* Natsumi Findbar With Custom Tweaks*/
+/* This theme is hevily based off of the natsumi findbar (RIP Natsumi, great project and my insperation */
+
+@keyframes launch-animation {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+  
+    to {
+      top: 20px;
+      opacity: 1;
+    }
+  }
+  
+  
+  /*noinspection CssInvalidFunction*/
+  findbar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: min(525px, 80%);
+    min-height: 70px;
+    border-radius: var(--zen-border-radius);
+    background: var(--panel-background) !important;
+    border: 1px solid light-dark(rgba(20, 20, 20, 0.2), #444) !important;
+    opacity: 1;
+    transition: background 0.2s ease, opacity 0.2s ease, visibility 0.2s ease,
+      top 0.2s ease, box-shadow 0.2s ease !important;
+    animation: launch-animation 0.2s ease;
+  
+    &:is([hidden="true"]) {
+      opacity: 0 !important;
+      top: 0 !important;
+    }
+  
+    .findbar-closebutton {
+      outline: none !important;
+    }
+  
+    .findbar-container {
+      margin-left: 5px !important;
+      margin-bottom: 3px !important;
+      flex-wrap: wrap;
+      height: auto !important;
+      row-gap: 6px;
+  
+      & > :first-child {
+        width: 100% !important;
+        margin-top: 5px !important;
+        padding-bottom: 5px !important;
+        border-bottom: 1px solid
+          light-dark(rgba(20, 20, 20, 0.2), #444) !important;
+  
+        &::before {
+          content: "";
+          width: 16px !important;
+          min-width: 16px !important;
+          background-image: url(chrome://global/skin/icons/search-glass.svg) !important;
+          background-repeat: no-repeat;
+          margin-top: 5px;
+          margin-right: 7px;
+          margin-left: 5px;
+  
+          @media (prefers-color-scheme: dark) {
+            filter: invert();
+          }
+        }
+  
+        .findbar-textbox {
+          background: none !important;
+          padding: 0 !important;
+          font-size: 15px !important;
+          box-shadow: none !important;
+          width: 100% !important;
+          border: none !important;
+  
+  
+          &::-moz-selection {
+            background: var(--panel-background) !important;
+          }
+        }
+  
+        toolbarbutton {
+          width: 24px !important;
+          justify-content: space-between !important;
+          padding: 4px !important;
+          margin-left: 3px !important;
+          margin-right: 0 !important;
+        }
+      }
+  
+      checkbox,
+      label,
+      description {
+        margin-left: 4px !important;
+        margin-right: 6px !important;
+      }
+  
+      .findbar-label {
+        display: flex;
+        flex-basis: 100% !important;
+  
+        &:is([hidden="true"]) {
+          display: none;
+        }
+      }
+  
+      .found-matches {
+        font-size: 14px !important;
+        margin-top: 10px !important;
+  
+        &:not([hidden]) {
+          &::before {
+            background-image: url(chrome://global/skin/icons/search-glass.svg) !important;
+            background-repeat: no-repeat !important;
+            padding-left: 25px !important;
+            color: black !important;
+  
+            @media (prefers-color-scheme: dark) {
+              filter: invert();
+            }
+          }
+        }
+      }
+  
+      .findbar-find-status {
+        display: none;
+        margin-left: 29px !important;
+  
+        &:is([status="notfound"]) {
+          margin-left: 4px !important;
+          margin-top: 10px !important;
+          font-size: 14px !important;
+          font-weight: normal !important;
+          flex-basis: 100% !important;
+  
+          &::before {
+            content: "";
+            min-width: 17px !important;
+            min-height: 17px !important;
+            background-image: url(chrome://global/skin/icons/close.svg) !important;
+            margin-right: 8px !important;
+  
+            @media (prefers-color-scheme: dark) {
+              filter: invert();
+            }
+          }
+        }
+  
+        &:is([data-l10n-id]) {
+          display: flex;
+        }
+      }
+  
+      .checkbox-label {
+        font-size: 12px !important;
+      }
+    }
+  }
+  

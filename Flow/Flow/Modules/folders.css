@@ -1,0 +1,472 @@
+/* ==== Tab groups ==== */
+/* Flow uses Advanced Tab Groups for the folders, please check out hte repo for more info */
+/* https://github.com/Anoms12/Advanced-Tab-Groups */
+/* ====== V1.5.2 ====== */
+/* Make groups workspace specific */
+/* Lets get a config here `browser.tabs.groups.enabled` */
+tab-group:not([split-view-group]) {
+  /* Visual Hierarchy Improvements */
+  display: flex !important;
+  flex-direction: column !important;
+  @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+    width: var(--tab-min-width) !important;
+  }
+
+  @media (-moz-bool-pref: "tab.groups.background") {
+    background: color-mix(
+      in srgb,
+      var(--tab-group-color-invert) 12%,
+      transparent
+    ) !important;
+
+    @media (-moz-bool-pref: "tab.groups.borders") {
+      border-top: 1px solid #f2f2f21f !important;
+      border-bottom: 1px solid #4442441f !important;
+    }
+  }
+
+  border-radius: calc(var(--border-radius-medium) + 2px) !important;
+  margin: 2px 2px 2px 2px;
+  transition: max-height 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden !important;
+
+  & .tab-group-label-container {
+    flex: 0 0 auto !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    --tab-group-color-pale: transparent !important;
+    --tab-group-color: transparent !important;
+    margin: 0 !important;
+    height: 36px !important;
+    border-radius: calc(var(--border-radius-medium) + 2px) !important;
+    transition: transform 0.2s ease;
+    transition: background-color 0.2s ease;
+    @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+      width: var(--tab-min-width) !important;
+    }
+
+    &:hover {
+      background-color: var(--tab-hover-background-color) !important;
+    }
+
+    &:after {
+      display: none;
+      padding: 0px !important;
+      background-color: color-mix(
+        in srgb,
+        var(--tab-group-color) 50%,
+        transparent
+      ) !important;
+    }
+
+    & > label {
+      width: 100% !important;
+      background: transparent !important;
+      border: none !important;
+      font-weight: 400 !important;
+      text-align: center !important;
+      color: var(--sidebar-text-color) !important;
+      margin: 0 !important;
+      display: flex !important;
+      justify-content: flex-start !important;
+      align-content: flex-start !important;
+      padding-left: 34.5px !important;
+      font-size: 12px !important;
+      margin-top: 6px !important;
+
+      @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+        color: transparent !important;
+      }
+    }
+    & > label::before {
+      content: "" !important;
+      position: absolute !important;
+      left: 6px !important;
+      @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+        left: 8px !important;
+      }
+      top: 25% !important;
+      width: 20px !important;
+      height: 20px !important;
+
+      @media (-moz-bool-pref: "tab.groups.theme-folders") {
+        background-color: color-mix(
+          in srgb,
+          var(--tab-group-color-invert) 100%,
+          transparent
+        ) !important;
+      }
+
+      @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+        background-color: var(--sidebar-text-color) !important;
+      }
+
+      @media (-moz-bool-pref: "tab.groups.native-icons") {
+        mask-image: url("chrome://browser/skin/zen-icons/folder.svg") !important;
+      }
+
+      @media not (-moz-bool-pref: "tab.groups.native-icons") {
+        @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+          mask-image: var(--flow-folder-empty-open-icon);
+        }
+
+        @media (-moz-bool-pref: "tab.groups.fill-folders") {
+          mask-image: var(--flow-folder-filled-open-icon);
+        }
+      }
+
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      background-size: contain !important;
+      background-repeat: no-repeat !important;
+    }
+  }
+
+  & tab:not([zen-glance-tab]) {
+    width: calc(var(--zen-sidebar-width)-18px) !important;
+    opacity: 1 !important;
+    margin-left: 18px !important;
+    transition: opacity 0.25s ease-in, font-size 0.25s ease-out,
+      margin 0.25s ease-out, padding 0.25s ease-out !important;
+    overflow: visible !important;
+    @media (-moz-bool-pref: "tab.groups.display-tab-range") {
+      transform-origin: left center;
+    }
+
+    .tab-group-line {
+      --tab-group-color-invert: transparent !important;
+      --tab-group-color: transparent !important;
+    }
+
+    .tab-background:active {
+      backdrop-filter: blur(10px) !important;
+    }
+
+    @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+      margin-left: 0 !important;
+    }
+  }
+
+  @media (-moz-bool-pref: "tab.groups.display-tab-range") {
+    tab::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 2px;
+      height: 41px !important;
+      background-color: light-dark(
+        var(--tab-group-color),
+        var(--tab-group-color-invert)
+      );
+      border-radius: 360px !important;
+      z-index: 999 !important;
+      right: 160px;
+      left: 0; /* Reset left positioning */
+      transform: translateX(-5px) !important;
+    }
+  }
+  @media not (-moz-bool-pref: "tab.groups.display-tab-range") {
+    tab::before {
+      background: none !important;
+    }
+  }
+
+  &[collapsed] {
+    max-height: 36px !important;
+    transition: max-height 0.25s ease-out;
+
+    & tab {
+      z-index: -1 !important;
+      display: flex !important;
+      opacity: 0.1 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    & .tab-group-label-container > label::before {
+      content: "" !important;
+      position: absolute !important;
+      left: 6px !important;
+      @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+        left: 8px !important;
+      }
+      top: 25% !important;
+      width: 20px !important;
+      height: 20px !important;
+
+      @media (-moz-bool-pref: "tab.groups.native-icons") {
+        mask-image: url("chrome://browser/skin/zen-icons/folder.svg") !important;
+      }
+
+      @media not (-moz-bool-pref: "tab.groups.native-icons") {
+        @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+          mask-image: var(--flow-folder-empty-closed-icon);
+        }
+
+        @media (-moz-bool-pref: "tab.groups.fill-folders") {
+          mask-image: var(--flow-folder-filled-closed-icon);
+        }
+      }
+
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      background-size: contain !important;
+      background-repeat: no-repeat !important;
+    }
+  }
+
+  @media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+    @media (-moz-bool-pref: "tab.groups.add-arrow") {
+      /* arrow icon */
+      & .tab-group-label-container {
+        &:after {
+          display: none !important;
+        }
+
+        & > label {
+          display: flex !important;
+          justify-content: space-between !important;
+        }
+
+        & > label::after {
+          content: "" !important;
+          position: relative !important;
+          top: 40% !important;
+          transform: translateY(-50%) rotate(180deg) !important;
+          width: 13px !important;
+          height: 13px !important;
+          background-color: var(--sidebar-text-color);
+          mask-image: var(--flow-folder-arrow-icon);
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          background-size: contain !important;
+          background-repeat: no-repeat !important;
+          margin-right: 0 !important;
+          transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+      }
+
+      &[collapsed] {
+        & .tab-group-label-container > label::after {
+          transform: translateY(-50%) !important;
+        }
+      }
+    }
+  }
+
+  /* Expand when NOT collapsed */
+  &:not([collapsed]) {
+    max-height: 500px !important;
+    overflow: scroll !important;
+    scrollbar-width: none !important;
+  }
+
+  tab-group:has(tab[hidden]) {
+    display: none !important;
+  }
+}
+
+#tabbrowser-tabs {
+  & .tabbrowser-tab {
+    &:active {
+      transition: scale 0.03s !important;
+      scale: 0.98;
+    }
+  }
+}
+
+.all-tabs-group-button {
+  .toolbarbutton-icon {
+    @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+      fill: #ffffff !important;
+    }
+
+    @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-empty-closed-icon);
+    }
+
+    @media (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-filled-closed-icon);
+    }
+
+    width: 16px !important;
+    height: 16px !important;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+#context_moveTabToGroupPopupMenu {
+  .menu-iconic-icon {
+    @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+      fill: #ffffff !important;
+    }
+
+    @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-empty-closed-icon);
+    }
+
+    @media (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-filled-closed-icon);
+    }
+
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+.all-tabs-group-saved-group {
+  clip: none !important;
+
+  .toolbarbutton-icon {
+    @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+      fill: #ffffff !important;
+    }
+
+    @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-empty-closed-icon);
+    }
+
+    @media (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-filled-closed-icon);
+    }
+
+    fill: light-dark(
+      var(--tab-group-color),
+      var(--tab-group-color-invert)
+    ) !important;
+    width: 16px !important;
+    height: 16px !important;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+tab-group:not([collapsed]) {
+  @media (-moz-bool-pref: "tab.groups.better-unload") {
+    .tabbrowser-tab[pending="true"] {
+      filter: grayscale(1);
+      opacity: 0.5 !important;
+    }
+  }
+}
+
+.all-tabs-group-button {
+  .toolbarbutton-icon {
+    @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+      fill: #ffffff !important;
+    }
+
+    @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: url("chrome://browser/skin/zen-icons/folder.svg");
+    }
+
+    @media (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-filled-closed-icon);
+    }
+
+    width: 16px !important;
+    height: 16px !important;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+#context_moveTabToGroupPopupMenu {
+  .menu-iconic-icon {
+    @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+      fill: #ffffff !important;
+    }
+
+    @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-empty-closed-icon);
+    }
+
+    @media (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-filled-closed-icon);
+    }
+
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+/* Fix saved group Icons, probably will not work until the nexr ff version... */
+.all-tabs-group-saved-group {
+  clip: none !important;
+
+  .toolbarbutton-icon {
+    @media not (-moz-bool-pref: "tab.groups.theme-folders") {
+      fill: #ffffff !important;
+    }
+
+    @media not (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: url("chrome://browser/skin/zen-icons/folder.svg");
+    }
+
+    @media (-moz-bool-pref: "tab.groups.fill-folders") {
+      mask-image: var(--flow-folder-filled-closed-icon);
+    }
+
+    fill: light-dark(
+      var(--tab-group-color),
+      var(--tab-group-color-invert)
+    ) !important;
+    width: 16px !important;
+    height: 16px !important;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+@media (-moz-bool-pref: "tab.groups.hide-save-info") {
+  #allTabsMenu-tabsSeparator {
+    display: none !important;
+  }
+
+  #allTabsMenu-groupsView {
+    display: none !important;
+  }
+
+  /* Hide currently disfunctional "Save and close group" text */
+  #tabGroupEditor_saveAndCloseGroup {
+    display: none !important;
+  }
+}
+
+tab-group:not([collapsed]) {
+  @media (-moz-bool-pref: "tab.groups.better-unload") {
+    .tabbrowser-tab[pending="true"] {
+      filter: grayscale(1);
+      opacity: 0.5 !important;
+    }
+  }
+}
+
+/* fix icon padding */
+.tabbrowser-tab[zen-glance-tab] {
+  .tab-icon-stack {
+    padding: 0 !important;
+  }
+
+  .tab-icon-stack {
+    width: min-content !important;
+  }
+
+  .tab-label-container {
+    padding: 0 !important;
+  }
+}

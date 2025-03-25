@@ -1,0 +1,18 @@
+/* Imports */
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* Files */
+/* Asset Imports */
+@import "Flow/Flow/Assets/icons.css";
+
+/* Theme imports */
+@import "Flow/Flow/modules/animations.css";
+@import "Flow/Flow/modules/containers.css";
+@import "Flow/Flow/modules/contextmenu.css";
+@import "Flow/Flow/modules/experimential.css";
+@import "Flow/Flow/modules/findbar.css";
+@import "Flow/Flow/modules/folders.css";
+@import "Flow/Flow/modules/patches.css";
+@import "Flow/Flow/modules/qol.css";
+@import "Flow/Flow/modules/urlbar.css";

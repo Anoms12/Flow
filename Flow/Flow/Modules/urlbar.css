@@ -1,0 +1,215 @@
+/* URL bar */
+/* A more Arc like URL bar with my own tweaks, if you want to turn somthing off please make an issue. */
+#zen-tabbox-wrapper {
+  transition: 0.25s ease !important;
+}
+
+#urlbar {
+  transition: opacity 0.3s ease !important;
+}
+
+#browser:has(
+    #urlbar:is([breakout][breakout-extend], [breakout][usertyping][focused])
+  ) {
+  #zen-tabbox-wrapper {
+    opacity: 0.5;
+    backdrop-filter: blur(30px) !important;
+    scale: 0.98;
+  }
+
+  &:after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+
+    width: 100vw;
+    height: 100vh;
+
+    top: 0px;
+    left: 0px;
+
+    background-color: var(--zen-main-browser-background) !important;
+    opacity: 0.1;
+  }
+}
+
+#urlbar[breakout-extend] {
+  transition: max-height 0.2s ease-in-out !important;
+
+  #urlbar-background {
+    border: 1px solid light-dark(rgba(0, 0, 0, 100), #666666) !important;
+    backdrop-filter: blur(30px) !important;
+    background: light-dark(
+      rgba(255, 255, 255, 0.95),
+      rgba(00, 00, 00, 0.95)
+    ) !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 6px 3px rgba(255, 255, 255, 0.05) !important;
+  }
+}
+
+/* Limit Results if more than four children */
+.urlbarView-row:nth-last-child(-n + 2):nth-child(n + 5) {
+  display: none !important;
+}
+
+.urlbarView-body-inner {
+  border-color: #444 !important;
+}
+
+.urlbarView-row-inner .urlbarView-url {
+  color: light-dark(
+    var(--zen-colors-primary),
+    var(--zen-colors-primary-foreground)
+  ) !important;
+}
+
+@media (-moz-bool-pref: "flow.urlbar.better-search-shortcuts") {
+  /* ChatGPT */
+  .urlbar-input-container:has(#urlbar-input[aria-label="Search ChatGPT"]) {
+    #identity-box {
+      display: none !important;
+    }
+    #urlbar-search-mode-indicator {
+      display: flex !important;
+      background: #75ac9d !important;
+      #urlbar-search-mode-indicator-title {
+        order: 1 !important;
+        color: black !important;
+      }
+      #urlbar-search-mode-indicator-close {
+        background: var(--flow-urlbar-chatgpt-icon) !important;
+        background-size: 16px !important;
+        padding-left: 5px;
+        background-repeat: no-repeat !important;
+      }
+    }
+  }
+
+  /* Duck Duck Go */
+  .urlbar-input-container:has(
+      #urlbar-input[aria-label="Search with DuckDuckGo"]
+    ) {
+    #identity-box {
+      display: none !important;
+    }
+    #urlbar-search-mode-indicator {
+      display: flex !important;
+      background: #ffffff !important;
+      #urlbar-search-mode-indicator-title {
+        order: 1 !important;
+        color: black !important;
+      }
+      #urlbar-search-mode-indicator-close {
+        background: var(--flow-urlbar-ddg-icon) !important;
+        background-repeat: no-repeat !important;
+        background-size: 16px !important;
+        padding-left: 5px;
+        background-repeat: no-repeat !important;
+      }
+    }
+  }
+
+  /* Google */
+  .urlbar-input-container:has(#urlbar-input[aria-label="Search with Google"]) {
+    #identity-box {
+      display: none !important;
+    }
+    #urlbar-search-mode-indicator {
+      display: flex !important;
+      background: #ffffff !important;
+      #urlbar-search-mode-indicator-title {
+        order: 1 !important;
+        color: black !important;
+      }
+      #urlbar-search-mode-indicator-close {
+        background: var(--flow-urlbar-google-icon) !important;
+        background-size: 16px !important;
+        padding-left: 5px;
+        background-repeat: no-repeat !important;
+      }
+    }
+  }
+}
+
+/* A more Arc like feeling for the switch tab button */
+/*
+* =========================
+* |   URLbar Swith tab    |
+* =========================
+*/
+.urlbarView-title-separator {
+  margin-left: auto !important;
+}
+
+.urlbarView-userContext {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 3px !important;
+  padding: 2px 4px 2px 4px !important;
+  margin-right: 1% !important;
+  position: relative !important;
+  display: flex !important;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.urlbarView-action {
+  margin-left: auto !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 3px !important;
+  padding: 2px 0px 2px 0px !important;
+  margin-right: 1% !important;
+  position: relative !important;
+  display: flex !important;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.urlbarView-userContext-iconMode {
+  display: flex !important;
+  opacity: 60% !important;
+  transition: opacity 0.2s ease-out;
+
+  &:hover {
+    opacity: 100% !important;
+  }
+
+  &::after {
+    content: "" !important;
+    margin-left: 5px !important;
+    top: 0% !important;
+    width: 14px !important;
+    height: 14px !important;
+    color: white !important;
+    background: white !important;
+    mask-image: var(--flow-urlbar-arrow-icon) !important;
+    mask-size: 14px 14px !important;
+    mask-repeat: no-repeat !important;
+    mask-position: center !important;
+  }
+}
+
+/* Better loading indicator */
+@media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  :has(tab[busy][selected]) #urlbar {
+    background: linear-gradient(
+      90deg,
+      #00000000 40%,
+      rgba(255, 255, 255, 0.1) 50%,
+      #00000000 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}

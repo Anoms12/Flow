@@ -1,0 +1,99 @@
+/* Qol Features that make the browser smoother but did not need there own file. */
+
+/* Better Swipe Navigation */
+browserStack browser {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) 0.1s !important;
+}
+
+.browserStack:has(
+    #historySwipeAnimationPreviousArrow:not([style="translate: none;"])
+  )
+  browser {
+  scale: 0.95 !important;
+  transform: translateX(3%) !important;
+  border-radius: 2em !important;
+}
+
+.browserStack:has(
+    #historySwipeAnimationNextArrow:not([style="translate: none;"])
+  )
+  browser {
+  scale: 0.95 !important;
+  transform: translateX(-3%) !important;
+  border-radius: 2em !important;
+}
+
+/* Restyle music player */
+#zen-media-controls-toolbar {
+  & > toolbaritem {
+    background-color: light-dark(
+      rgba(255, 255, 255, 0.8),
+      rgba(0, 0, 0, 0.8)
+    ) !important;
+    backdrop-filter: saturate(3) contrast(2) !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5) !important;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      backdrop-filter: blur(15px);
+      border-radius: inherit !important;
+      z-index: -999;
+    }
+  }
+}
+
+/* Tab music animations */
+.tabbrowser-tab[soundplaying]:not([muted]) .tab-icon-stack::after {
+  animation: soundFadeIn 1s ease-in forwards;
+}
+
+.tabbrowser-tab[soundplaying][muted] .tab-icon-stack::after,
+.tabbrowser-tab[soundplaying][soundplaying-scheduledremoval]
+  .tab-icon-stack::after {
+  animation: soundFadeOut 1s ease-out forwards;
+}
+
+.tabbrowser-tab[soundplaying] .tab-icon-stack::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.tabbrowser-tab[soundplaying] .tab-icon-stack::after {
+  top: -20px;
+  left: 8px;
+}
+
+#zen-essentials-container .tabbrowser-tab[soundplaying] .tab-icon-stack::after {
+  left: 0px;
+}
+
+.tabbrowser-tab[soundplaying][selected] .tab-icon-stack::after {
+  background: url("Assets/note-indicator.svg") no-repeat;
+}
+
+#tabbrowser-tabs,
+#zen-essentials-container {
+  .tabbrowser-tab[soundplaying]:not(
+      [muted],
+      [activemedia-blocked],
+      [soundplaying-scheduledremoval]
+    ) {
+    overflow: visible !important;
+  }
+}
+
+.toolbarbutton-icon[label="History"] {
+  list-style-image: var(--flow-history-icon) !important;
+}
+
+#PanelUI-menu-button {
+  list-style-image: var(--flow-zen-icon) !important;
+}
