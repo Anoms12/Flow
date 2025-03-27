@@ -1,7 +1,7 @@
 # Flow
 A highly customizable and peaceful theme for Zen Browser that makes it all _flow_ together
 ## Features
-Features included in Flow and a descrption and/or screenshot to showcase
+Features included in Flow and a descrption and/or screenshot to showcase.
 ### Better Animations
 Flow includes reoworked animations from mulitple sorces like [Animations Plus](https://github.com/Anoms12/Animations-plus). These include:
  1. Smoother Transitions
